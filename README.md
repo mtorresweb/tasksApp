@@ -20,11 +20,9 @@ In this project, I've developed an intuitive application tailored for project an
 6. **Token-Based Authentication and Security:** Authentication is implemented using jsonwebtoken, providing secure and authenticated access. Security is further strengthened with helmet, a collection of middleware functions for Express applications. Additionally, express rate limit guards against potential malicious activities, ensuring application integrity.
     
 ## Testing the application
-    
-------------
-    
+
 To effectively test the application, follow these steps:
-    
+
 1. **Account Creation:** Click 'signUp' to create an account. Provide a fictional email address, password, and username.
     
 2. **Project Manipulation:** You can add more projects by clicking the + icon. Each project is editable and removable. Clicking a project's name redirects you to its content, enabling task creation or removal within the project.
