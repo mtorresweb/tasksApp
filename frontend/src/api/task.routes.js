@@ -1,4 +1,4 @@
-const endPoint = "http://localhost:3001/api/v1/task/";
+const endPoint = `${import.meta.env.VITE_API_URL}/api/v1/task/`;
 import axios from "axios";
 import config from "./request.conf";
 import handleApiError from "@/helpers/handleApiError";
@@ -49,7 +49,7 @@ export const modifyTask = async (user, task) => {
 export const getTasks = async (user, project) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:3001/api/v1/project/${project.id}/tasks`,
+      `${import.meta.env.VITE_API_URL}/api/v1/project/${project.id}/tasks`,
       config(user),
     );
 

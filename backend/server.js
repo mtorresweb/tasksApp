@@ -7,7 +7,7 @@ import "dotenv/config";
 import "./models/project.model.js";
 import "./models/task.model.js";
 
-const port = process.env.EXPRESS_SERVER_DOCKER_PORT;
+const port = process.env.PORT;
 
 // Initializes the server
 const main = async () => {
