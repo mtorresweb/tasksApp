@@ -1,6 +1,8 @@
 # tasksApp
 Tasks application made with React, Express and PostgreSQL.
 
+[![tasks](https://res.cloudinary.com/dojhj2erh/image/upload/v1692239507/portfolio/largeTasks_uk6mjs.png "tasks")](https://res.cloudinary.com/dojhj2erh/image/upload/v1692239507/portfolio/largeTasks_uk6mjs.png "tasks")
+
 ## Overview
 
 In this project, I've developed an intuitive application tailored for project and task management. Users have the ability to create projects, assign tasks to them, and modify project details as needed. The application's frontend is built using React, Redux Toolkit, and react-markdown for enhanced project descriptions. On the backend, Express and PostgreSQL are employed, and security features include token-based authentication using jsonwebtoken, helmet for enhanced security, and express rate limit for further protection.
