@@ -14,7 +14,7 @@ const register = async (req, res) => {
   if (userExists)
     return res
       .status(400)
-      .send({ success: false, message: "User already exists" });
+      .json({ success: false, message: "User already exists" });
 
   //Encrypts the password, then creates a new user, finally deletes the password property to send the information to the client
   userData.password = await bcrypt.hash(userData.password, 14);
@@ -37,7 +37,7 @@ const register = async (req, res) => {
   userData.id = newUser.id;
 
   //Sends the token and user data without the password
-  return res.status(200).send({
+  return res.status(200).json({
     success: true,
     message: "User registered successfully",
     user: { ...userData, token: generateToken(userData) },
@@ -62,7 +62,7 @@ const logIn = async (req, res) => {
   if (!passwordMatch || !user)
     return res
       .status(400)
-      .send({ success: false, message: "Incorrect email or password" });
+      .json({ success: false, message: "Incorrect email or password" });
 
   let userToReturn = {
     id: user.id,
@@ -71,7 +71,7 @@ const logIn = async (req, res) => {
   };
   userToReturn.token = generateToken(userToReturn);
 
-  return res.status(200).send({
+  return res.status(200).json({
     success: true,
     message: "Logged in successfully",
     user: userToReturn,
@@ -89,11 +89,11 @@ const getUserProjects = async (req, res) => {
   if (!projects.length)
     return res
       .status(404)
-      .send({ success: false, message: "No projects found", projects });
+      .json({ success: false, message: "No projects found", projects });
 
   return res
     .status(200)
-    .send({ success: true, message: "Projects found successfully", projects });
+    .json({ success: true, message: "Projects found successfully", projects });
 };
 
 export default {

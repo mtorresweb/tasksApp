@@ -7,17 +7,17 @@ const getTask = async (req, res) => {
   const task = await Task.findOne({ where: { id }, include: "Project" });
 
   if (!task)
-    return res.status(404).send({ success: false, message: "Task not found" });
+    return res.status(404).json({ success: false, message: "Task not found" });
 
   if (task.Project.userId != req.user.id)
-    return res.status(404).send({
+    return res.status(404).json({
       success: false,
       message: "You are not authorized to access this",
     });
 
   return res
     .status(200)
-    .send({ success: true, message: "Task found successfully", task });
+    .json({ success: true, message: "Task found successfully", task });
 };
 
 const addTask = async (req, res) => {
@@ -27,7 +27,7 @@ const addTask = async (req, res) => {
 
   return res
     .status(200)
-    .send({ success: true, message: "Task created successfully", task });
+    .json({ success: true, message: "Task created successfully", task });
 };
 
 const deleteTask = async (req, res) => {
@@ -38,10 +38,10 @@ const deleteTask = async (req, res) => {
   if (!task)
     return res
       .status(404)
-      .send({ success: false, message: "Task does not exist" });
+      .json({ success: false, message: "Task does not exist" });
 
   if (task.Project.userId != req.user.id)
-    return res.status(404).send({
+    return res.status(404).json({
       success: false,
       message: "You are not authorized to access this",
     });
@@ -50,7 +50,7 @@ const deleteTask = async (req, res) => {
 
   return res
     .status(200)
-    .send({ success: true, message: "Task removed successfully" });
+    .json({ success: true, message: "Task removed successfully" });
 };
 
 const updateTask = async (req, res) => {
@@ -60,20 +60,20 @@ const updateTask = async (req, res) => {
   const task = await Task.findOne({ where: { id }, include: "Project" });
 
   if (!task)
-    return res.status(404).send({ success: false, message: "Task not found" });
+    return res.status(404).json({ success: false, message: "Task not found" });
 
   if (task.Project.userId != req.user.id)
-    return res.status(404).send({
+    return res.status(404).json({
       success: false,
       message: "You are not authorized to access this",
     });
 
   task.done = done;
-  task.save();
+  await task.save();
 
   return res
     .status(200)
-    .send({ success: true, message: "Task updated successfully", task });
+    .json({ success: true, message: "Task updated successfully", task });
 };
 
 export default {

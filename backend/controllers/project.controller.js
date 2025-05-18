@@ -10,17 +10,17 @@ const getProject = async (req, res) => {
   if (!project)
     return res
       .status(404)
-      .send({ success: false, message: "Project not found" });
+      .json({ success: false, message: "Project not found" });
 
   if (project.userId != req.user.id)
-    return res.status(403).send({
+    return res.status(403).json({
       success: false,
       message: "You are not authorized to access this",
     });
 
   return res
     .status(200)
-    .send({ success: true, message: "Project found successfully", project });
+    .json({ success: true, message: "Project found successfully", project });
 };
 
 const addProject = async (req, res) => {
@@ -31,7 +31,7 @@ const addProject = async (req, res) => {
 
   return res
     .status(200)
-    .send({ success: true, message: "Project created successfully", project });
+    .json({ success: true, message: "Project created successfully", project });
 };
 
 const deleteProject = async (req, res) => {
@@ -42,10 +42,10 @@ const deleteProject = async (req, res) => {
   if (!project)
     return res
       .status(404)
-      .send({ success: false, message: "Project does not exist" });
+      .json({ success: false, message: "Project does not exist" });
 
   if (project.userId != req.user.id)
-    return res.status(403).send({
+    return res.status(403).json({
       success: false,
       message: "You are not authorized to access this",
     });
@@ -58,7 +58,7 @@ const deleteProject = async (req, res) => {
 
   return res
     .status(200)
-    .send({ success: true, message: "Project deleted successfully" });
+    .json({ success: true, message: "Project deleted successfully" });
 };
 
 const updateProject = async (req, res) => {
@@ -70,10 +70,10 @@ const updateProject = async (req, res) => {
   if (!project)
     return res
       .status(404)
-      .send({ success: false, message: "Project not found" });
+      .json({ success: false, message: "Project not found" });
 
   if (project.userId != req.user.id)
-    return res.status(403).send({
+    return res.status(403).json({
       success: false,
       message: "You are not authorized to access this",
     });
@@ -83,7 +83,7 @@ const updateProject = async (req, res) => {
 
   return res
     .status(200)
-    .send({ success: true, message: "Project updated successfully", project });
+    .json({ success: true, message: "Project updated successfully", project });
 };
 
 const getProjectTasks = async (req, res) => {
@@ -92,14 +92,14 @@ const getProjectTasks = async (req, res) => {
   const project = await Project.findByPk(id);
 
   if (!project) {
-    return res.status(404).send({
+    return res.status(404).json({
       success: false,
       message: "Project not found",
     });
   }
 
   if (project.userId != req.user.id)
-    return res.status(403).send({
+    return res.status(403).json({
       success: false,
       message: "You are not authorized to access this",
     });
@@ -111,11 +111,11 @@ const getProjectTasks = async (req, res) => {
   if (!tasks.length)
     return res
       .status(404)
-      .send({ success: false, message: "No tasks found", tasks });
+      .json({ success: false, message: "No tasks found", tasks });
 
   return res
     .status(200)
-    .send({ success: true, message: "Tasks obtained successfully", tasks });
+    .json({ success: true, message: "Tasks obtained successfully", tasks });
 };
 
 export default {

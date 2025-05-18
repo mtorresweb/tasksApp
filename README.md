@@ -1,30 +1,226 @@
-# tasksApp
-Tasks application made with React, Express and PostgreSQL.
+# Tasks App
+
+A full-stack project and task management application built with React, Express, and PostgreSQL.
 
 [![tasks](https://res.cloudinary.com/dojhj2erh/image/upload/v1692239507/portfolio/largeTasks_uk6mjs.png "tasks")](https://res.cloudinary.com/dojhj2erh/image/upload/v1692239507/portfolio/largeTasks_uk6mjs.png "tasks")
 
 ## Overview
 
-In this project, I've developed an intuitive application tailored for project and task management. Users have the ability to create projects, assign tasks to them, and modify project details as needed. The application's frontend is built using React, Redux Toolkit, and react-markdown for enhanced project descriptions. On the backend, Express and PostgreSQL are employed, and security features include token-based authentication using jsonwebtoken, helmet for enhanced security, and express rate limit for further protection.
-    
-### Key Features
+Tasks App is an intuitive application tailored for project and task management. Users can create projects, assign tasks to them, and modify project details as needed. The application features a modern, responsive frontend built with React and Redux Toolkit, while the backend uses Express and PostgreSQL for robust data management and API services.
 
-1. **Project Creation and Task Assignment:** Users can create projects and assign tasks to them, fostering efficient organization and management. This feature enhances productivity and collaboration by providing a structured framework for task allocation.
-    
-2. **Dynamic Project Manipulation:** Projects are not static entities; they can be modified, added, or removed. This adaptability ensures that the application caters to evolving project requirements and maintains a relevant workspace.
-    
-3. **Enhanced Project Descriptions:** By incorporating react-markdown, project descriptions gain versatility and better readability. This improvement in documentation contributes to clearer project understanding and communication.
-    
-4. **Frontend with React and Redux Toolkit:** The frontend architecture leverages React for efficient component rendering and Redux Toolkit for streamlined state management. This combination ensures a responsive and seamless user experience.
-    
-5. **Backend using Express and PostgreSQL:** Express serves as the backend framework, managing API routes and requests, while PostgreSQL offers a robust database solution for storing project and task data securely and efficiently.
-    
-6. **Token-Based Authentication and Security:** Authentication is implemented using jsonwebtoken, providing secure and authenticated access. Security is further strengthened with helmet, a collection of middleware functions for Express applications. Additionally, express rate limit guards against potential malicious activities, ensuring application integrity.
-    
-## Testing the application
+## Table of Contents
 
-To effectively test the application, follow these steps:
+- [Tasks App](#tasks-app)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Tech Stack](#tech-stack)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+  - [Project Structure](#project-structure)
+    - [Frontend](#frontend-1)
+    - [Backend](#backend-1)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Backend Setup](#backend-setup)
+    - [Frontend Setup](#frontend-setup)
+  - [API Documentation](#api-documentation)
+    - [Authentication](#authentication)
+    - [Projects](#projects)
+    - [Tasks](#tasks)
+  - [Testing](#testing)
+    - [Backend Testing](#backend-testing)
+    - [Frontend Testing](#frontend-testing)
+  - [Security](#security)
+  - [Contributing](#contributing)
+  - [Using the Application](#using-the-application)
 
-1. **Account Creation:** Click 'signUp' to create an account. Provide a fictional email address, password, and username.
-    
-2. **Project Manipulation:** You can add more projects by clicking the + icon. Each project is editable and removable. Clicking a project's name redirects you to its content, enabling task creation or removal within the project.
+## Features
+
+- **User Authentication**: Secure registration, login, and logout functionality
+- **Project Management**: Create, view, edit, and delete projects
+- **Task Management**: Add tasks to projects, mark as complete/incomplete, and delete tasks
+- **Rich Text Support**: Project descriptions support markdown formatting
+- **Priority System**: Assign priority levels to projects for better organization
+- **Responsive Design**: Fully responsive interface that works on desktop and mobile devices
+
+## Tech Stack
+
+### Frontend
+- **Framework**: React.js with Vite
+- **State Management**: Redux with Redux Toolkit
+- **Routing**: React Router v6
+- **Forms**: React Hook Form with Joi validation
+- **Styling**: CSS with PostCSS
+- **HTTP Client**: Axios
+- **Markdown**: React Markdown with Remark GFM
+- **UI Components**: React Icons, React Modal, React Tooltip, React Toastify
+
+### Backend
+- **Framework**: Express.js
+- **Database**: PostgreSQL with Sequelize ORM
+- **Authentication**: JWT (jsonwebtoken)
+- **Validation**: express-validator
+- **Security**: helmet, express-rate-limit, bcrypt
+- **Testing**: Jest, Supertest
+- **Performance Testing**: k6
+
+## Project Structure
+
+The project is organized into two main directories:
+
+### Frontend
+```
+frontend/
+├── src/
+│   ├── api/                 # API endpoints and configuration
+│   ├── components/          # React components
+│   ├── helpers/             # Helper functions and utilities
+│   ├── pages/               # Page components
+│   ├── redux/               # Redux store, slices, and thunks
+│   ├── styles/              # Global CSS styles
+│   └── test/                # Test configuration and utilities
+└── public/                  # Static assets
+```
+
+### Backend
+```
+backend/
+├── controllers/             # Route controllers
+├── database/                # Database connection and config
+├── helpers/                 # Helper utilities
+├── middlewares/             # Express middlewares
+├── models/                  # Sequelize models
+├── routes/                  # API routes
+├── tests/                   # Test files
+└── utils/                   # Utility functions
+```
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18 or higher recommended)
+- PostgreSQL
+- npm or pnpm
+
+### Backend Setup
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file with the following variables:
+   ```
+   PORT=5000
+   DATABASE_URL=postgres://username:password@localhost:5432/tasks_app
+   JWT_SECRET=your_jwt_secret
+   NODE_ENV=development
+   ```
+
+4. Start the server:
+   ```bash
+   npm run dev
+   ```
+
+### Frontend Setup
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file:
+   ```
+   VITE_API_URL=http://localhost:5000/api
+   ```
+
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## API Documentation
+
+The backend API provides the following endpoints:
+
+### Authentication
+- `POST /api/users/register` - Register a new user
+- `POST /api/users/login` - Log in a user
+- `GET /api/users/me` - Get current user information
+
+### Projects
+- `GET /api/projects` - Get all projects for current user
+- `GET /api/projects/:id` - Get a specific project
+- `POST /api/projects` - Create a new project
+- `PUT /api/projects/:id` - Update a project
+- `DELETE /api/projects/:id` - Delete a project
+
+### Tasks
+- `GET /api/projects/:projectId/tasks` - Get all tasks for a project
+- `POST /api/projects/:projectId/tasks` - Create a new task
+- `PUT /api/tasks/:id` - Update a task
+- `DELETE /api/tasks/:id` - Delete a task
+
+## Testing
+
+### Backend Testing
+The backend has comprehensive test coverage:
+
+```bash
+cd backend
+npm test                 # Run all tests
+npm run test:watch       # Run tests in watch mode
+npm run test:coverage    # Run tests with coverage
+npm run test:controllers # Run controller tests only
+npm run test:models      # Run model tests only
+npm run test:integration # Run integration tests only
+npm run test:load        # Run load tests with k6
+```
+
+### Frontend Testing
+```bash
+cd frontend
+npm test           # Run tests
+npm run test:watch # Run tests in watch mode
+npm run test:coverage # Run tests with coverage report
+```
+
+## Security
+
+The application implements several security features:
+
+- **Password Hashing**: All passwords are hashed using bcrypt
+- **JWT Authentication**: Secure token-based authentication
+- **Rate Limiting**: Protection against brute force attacks
+- **Helmet**: Set of middleware functions for securing HTTP headers
+- **Input Validation**: Thorough validation of all input data
+- **CORS Protection**: Configured Cross-Origin Resource Sharing
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Write tests for your changes
+4. Ensure all tests pass
+5. Submit a pull request
+
+## Using the Application
+
+1. **Account Creation**: Click 'Sign Up' to create an account with an email, password, and username
+2. **Project Management**: Add projects via the '+' icon, edit or delete them as needed
+3. **Task Management**: Click on a project name to view its details and manage tasks
+4. **Markdown Support**: Use markdown syntax in project descriptions for rich formatting

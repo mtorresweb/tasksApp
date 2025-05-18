@@ -8,6 +8,12 @@ import { useForm } from "react-hook-form";
 import { addProject } from "../../redux/slices/projects/projects.async.thunks";
 import { ToastContainer } from "react-toastify";
 
+/**
+ * AddProject component provides a form for creating a new project
+ * 
+ * @component
+ * @returns {JSX.Element} Rendered AddProject component with form controls
+ */
 const AddProject = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -16,10 +22,21 @@ const AddProject = () => {
   const [priority, setPriority] = useState(10);
   const [description, setDescription] = useState("");
 
+  /**
+   * Navigates back to the projects list page
+   */
   const goBack = () => {
     navigate("/projects");
   };
 
+  /**
+   * Creates a new project by dispatching the addProject action with form data
+   * 
+   * @param {Object} data - Form data from react-hook-form
+   * @param {string} data.name - Project name
+   * @param {number} data.priority - Project priority (0-10)
+   * @param {string} data.description - Project description (supports markdown)
+   */
   const createProject = (data) => {
     dispatch(addProject({ user, project: data }));
   };
@@ -64,7 +81,7 @@ const AddProject = () => {
         </div>
         <hr />
         <label htmlFor="description" className="description-label">
-          Here goes the description, feel free to use Markdown
+          Here you can add a description of your project, Markdown is supported.
           <TextareaAutosize
             {...register("description")}
             id="description"

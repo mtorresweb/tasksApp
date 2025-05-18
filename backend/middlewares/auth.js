@@ -7,7 +7,9 @@ const auth = (req, res, next) => {
     !req.headers.authorization ||
     !req.headers.authorization.startsWith("Bearer")
   ) {
-    return res.status(403).send("Authorization header required");
+    return res
+      .status(403)
+      .json({ success: false, message: "Authorization header required" });
   }
 
   //clean token
@@ -17,7 +19,9 @@ const auth = (req, res, next) => {
     let payload = jwt.verify(token, secretKey);
     req.user = payload;
   } catch {
-    return res.status(401).send("Session has expired");
+    return res
+      .status(401)
+      .json({ success: false, message: "Session has expired" });
   }
 
   next();

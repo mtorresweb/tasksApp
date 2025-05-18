@@ -6,8 +6,8 @@ const validateResults = (req, res, next) => {
     return next();
   }
 
-  return res.status(400).send({
-    success: "false",
+  return res.status(400).json({
+    success: false,
     message: "The information sent is invalid",
     errors: errors.array(),
   });
